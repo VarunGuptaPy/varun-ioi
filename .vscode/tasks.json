@@ -1,0 +1,72 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "C++: Debug build",
+            "type": "shell",
+            "command": "clang++",
+            "args": [
+                "${file}",
+                "-std=c++20",
+                "-Wall",
+                "-Wextra",
+                "-Wshadow",
+                "-fsanitize=address,undefined",
+                "-fno-omit-frame-pointer",
+                "-g",
+                "-O1",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "C++: Submission build",
+            "type": "shell",
+            "command": "clang++",
+            "args": [
+                "${file}",
+                "-std=c++20",
+                "-O2",
+                "-Wall",
+                "-Wextra",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "C++: Run with input.txt",
+            "type": "shell",
+            "command": "${fileDirname}/${fileBasenameNoExtension} < ${fileDirname}/input.txt",
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "dependsOn": "C++: Debug build",
+            "problemMatcher": []
+        },
+        {
+            "label": "C++: Stress test",
+            "type": "shell",
+            "command": "python3 stress.py",
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": []
+        }
+    ]
+}
