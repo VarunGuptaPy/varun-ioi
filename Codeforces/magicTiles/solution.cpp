@@ -9,10 +9,13 @@ using vi = vector<int>;
 #define rall(x) rbegin(x), rend(x)
 
 void solve() {
-    string path;
-    cin >> path;
-    vector<int> dp(path.size()+1,0);
-    
+    int n,m;
+    cin >> n >> m;
+    vector<pii> nTiles;
+    for (int i = 0; i<n; i++){
+        int start,end;
+        cin >> start >> end;
+    }
 }
 
 int main() {

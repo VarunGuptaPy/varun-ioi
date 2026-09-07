@@ -9,9 +9,20 @@ using vi = vector<int>;
 #define rall(x) rbegin(x), rend(x)
 
 void solve() {
-    string path;
-    cin >> path;
-    vector<int> dp(path.size()+1,0);
+    int n;
+    cin >> n;
+    vector<int> entries(n);
+    bool zeroPresent = false;
+    int lastzero = -2;
+    vector<int> lastZeroVec(n);
+    for (int i = 0; i<n; i++){
+        cin >> entries[i];
+        if (entries[i] == 0){
+            lastzero = i;
+            zeroPresent = true;
+        }
+        lastZeroVec[i] = lastzero;
+    }
     
 }
 

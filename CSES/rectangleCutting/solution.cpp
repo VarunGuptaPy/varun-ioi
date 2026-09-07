@@ -9,10 +9,19 @@ using vi = vector<int>;
 #define rall(x) rbegin(x), rend(x)
 
 void solve() {
-    string path;
-    cin >> path;
-    vector<int> dp(path.size()+1,0);
-    
+    int a,b;
+    cin >> a >> b;
+    int steps = 0;
+    while (a != b){
+        if (a > b){
+            a -= b;
+        } else if (a < b){
+            b -= a;
+        }
+        steps++;
+    }
+    cout << steps;
+
 }
 
 int main() {
