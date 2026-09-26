@@ -8,25 +8,23 @@ using vi = vector<int>;
 #define all(x) begin(x), end(x)
 #define rall(x) rbegin(x), rend(x)
 
-int getMaxScore(int n, vector<int>& arr, int start, int end, int sum){
-    if (start > end){
-        return sum;
-    }
-    int firstRemoval = getMaxScore(n,arr,start+1,end-1,sum+arr[start]);
-    int secondRemoval = getMaxScore(n,arr,start+1,end-1,sum+arr[end]);
-    return max(firstRemoval,secondRemoval);
-    
-}
-
 void solve() {
     int n;
     cin >> n;
     vector<int> arr(n);
+    vector<int> atEven;
+    vector<int> atOdd;
+    int peak = INT_MIN;
     for (int i = 0; i<n; i++){
         cin >> arr[i];
+        peak = max(peak,arr[i]);
+        if (i%2==0){
+            atEven.push_back(arr[i]);
+        } else {
+            atOdd.push_back(arr[i]);
+        }
     }
-    int maxScore = getMaxScore(n,arr,0,n-1,0);
-    cout << maxScore;
+    
 }
 
 int main() {
