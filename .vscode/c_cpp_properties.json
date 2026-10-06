@@ -1,14 +1,11 @@
 {
     "configurations": [
         {
-            "name": "Mac GCC",
-            "compilerPath": "/opt/homebrew/bin/g++-16",
-            "cppStandard": "c++20",
+            "name": "Windows GCC",
+            "compilerPath": "C:/msys64/ucrt64/bin/g++.exe",
             "cStandard": "c17",
-            "intelliSenseMode": "macos-gcc-arm64",
-            "includePath": [
-                "${workspaceFolder}/**"
-            ]
+            "cppStandard": "c++20",
+            "intelliSenseMode": "windows-gcc-x64"
         }
     ],
     "version": 4
