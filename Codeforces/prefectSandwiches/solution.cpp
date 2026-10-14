@@ -11,17 +11,11 @@ using vi = vector<int>;
 void solve() {
     int a,b;
     cin >> a >> b;
-    if (a < b){
+    if (a <= b){
         cout << -1 << '\n';
         return;
     }
-    int ans = 1;
-    for (int i = 2; i<=b; i++){
-        if (a%i == 0 && b%i == 0){
-            ans = i;
-        }
-    }
-    cout << ans << '\n';
+    cout << min(b,a-b) << '\n';
 }
 
 int main() {
