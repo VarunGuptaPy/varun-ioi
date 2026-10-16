@@ -8,43 +8,52 @@ using vi = vector<int>;
 #define all(x) begin(x), end(x)
 #define rall(x) rbegin(x), rend(x)
 
-class SegmentTree {
-    vector<int> tree;
+struct FenwickTree {
+    vector<ll> bit;
     int n;
 
-public:
-    SegmentTree(int size) : n(size) {
-        tree.resize(4 * n);
+    FenwickTree(int n) {
+        this->n = n;
+        bit.assign(n+1, 0);
     }
 
-    void update(int idx, int val) {
-        updateUtil(0, 0, n - 1, idx, val);
+    void update(int idx, ll delta) {
+        for (; idx <= n; idx += idx & -idx)
+            bit[idx] += delta;
     }
-
-private:
-    void updateUtil(int node, int start, int end, int idx, int val) {
-        if (start == end) {
-            tree[node] += val;
-        } else {
-            int mid = (start + end) / 2;
-            if (idx <= mid) {
-                updateUtil(2 * node + 1, start, mid, idx, val);
-            } else {
-                updateUtil(2 * node + 2, mid + 1, end, idx, val);
-            }
-            tree[node] = tree[2 * node + 1] + tree[2 * node + 2];
-        }
+    ll query(int idx) {
+        ll sum = 0;
+        for (; idx > 0; idx -= idx & -idx)
+            sum += bit[idx];
+        return sum;
     }
 };
-
-void solve() {
-    int n,q;
-    cin >> n >> q;
+void solve(){
+    int n,m;
+    cin >> n >> m;
     vector<int> arr(n);
-    for (int i = 0;i<n;i++){
+    for (int i = 0; i<n;i++){
         cin >> arr[i];
     }
-
+    FenwickTree ft(n);
+    ft.update(1,arr[0]);
+    for (int i = 1; i<n;i++){
+        ft.update(i+1,arr[i]-arr[i-1]);
+    }
+    for (int i = 0; i<m;i++){
+        int ins;
+        cin >> ins;
+        if (ins == 1){
+            int l,r,u;
+            cin >> l >> r >> u;
+            ft.update(l,u);
+            ft.update(r+1,-u);
+        } else {
+            int k;
+            cin >> k;
+            cout << ft.query(k) << '\n';
+        }
+    }
 }
 
 int main() {
