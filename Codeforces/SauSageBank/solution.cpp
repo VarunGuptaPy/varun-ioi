@@ -18,7 +18,6 @@ void solve() {
     for (int i = 1; i <= n; i++) {
         bankBalance *= 2;
 
-        // First k-1 withdrawals as early as possible
         if (i < k) {
             total += bankBalance;
             bankBalance = 1;
