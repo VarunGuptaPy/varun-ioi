@@ -9,13 +9,13 @@ using vi = vector<int>;
 #define rall(x) rbegin(x), rend(x)
 
 
-void goSolve(vector<int> &input,set<ll> &allSums, ll sum,ll index){
-    if (index == input.size()){
+void goSolve(vector<int> &input,int n,set<ll> &allSums, ll sum,ll index){
+    if (index == n){
         allSums.insert(sum);
         return;
     }
-    goSolve(input,allSums,sum,index+1);
-    goSolve(input,allSums,sum+input[index],index+1);
+    goSolve(input,n,allSums,sum,index+1);
+    goSolve(input,n,allSums,sum+input[index],index+1);
 }
 void solve() {
     int n;
@@ -26,17 +26,17 @@ void solve() {
         cin >> num;
         input.push_back(num);
     }
-    set<ll> allSums;
-    goSolve(input,allSums,0,0);;
-    for (auto itr = ++allSums.begin(); itr != allSums.end();itr++){
-        auto copyitr = itr;
-        if (*(copyitr)-*(--copyitr) != 1){
-            cout << *(copyitr) + 1;
-            break;
-        }
+    sort(input.begin(),input.end());
+    ll sum = 0;
+    for (int i = 0; i<n; i++){
+        if (input[i] > sum + 1){
+            cout << sum + 1; 
+            return;
+        } 
+        sum += input[i];
     }
+    cout << sum+1;
 }
-
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);

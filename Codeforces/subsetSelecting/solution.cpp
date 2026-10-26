@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+using ll = long long;
+using pii = pair<int, int>;
+using vi = vector<int>;
+
+#define all(x) begin(x), end(x)
+#define rall(x) rbegin(x), rend(x)
+
+void solve() {
+    int n, k;
+    cin >> n >> k;
+
+    vector<int> freq(n + 1, 0);
+
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        freq[x]++;
+    }
+
+    int available = 0;
+    int mex = 0;
+
+    for (int i = 0; i <= n; i++) {
+        available += freq[i];
+
+        if (freq[i] == 0 || available < k) {
+            break;
+        }
+
+        available -= k;
+        mex++;
+    }
+
+    cout << mex << '\n';
+}
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int test_cases = 1;
+    cin >> test_cases;
+
+    while (test_cases--) {
+        solve();
+    }
+
+    return 0;
+}
